@@ -1,1 +1,1 @@
-This is the very latest version of the README file for the basic Introduction To GPU Programming Course.
+This is an updated README file made for Module 0 of the Introduction to GPU Programming course during the Spring Semester of 2017 at Johns Hopkins University.
