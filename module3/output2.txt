@@ -1,0 +1,14 @@
+Detected 1 CUDA Capable device(s)
+
+Device: 0 "GK20A"
+===========================================
+The GK20A has:
+	-1984385024 total bytes of global memory
+	-32768 registers per block
+	-32 threads per warp
+	-A maximum of 1024 threads per block
+	-And a maximum thread dimension of 1024 x 1024 x 64
+numThreads: 1024 and blockSize: 64
+
+Output is Correct!
+Done

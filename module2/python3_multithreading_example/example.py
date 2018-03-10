@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import _thread
+import thread
 import time
 
 # Define a function for the thread
@@ -13,8 +13,8 @@ def print_time( threadName, delay):
 
 # Create two threads as follows
 try:
-   _thread.start_new_thread( print_time, ("Thread-1", 2, ) )
-   _thread.start_new_thread( print_time, ("Thread-2", 4, ) )
+   thread.start_new_thread( print_time, ("Thread-1", 2, ) )
+   thread.start_new_thread( print_time, ("Thread-2", 4, ) )
 except:
    print ("Error: unable to start thread")
 

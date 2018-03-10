@@ -1,0 +1,60 @@
+Detected 1 CUDA Capable device(s)
+
+Device: 0 "GK20A"
+===========================================
+The GK20A has:
+	-1984385024 total bytes of global memory
+	-32768 registers per block
+	-32 threads per warp
+	-A maximum of 1024 threads per block
+	-And a maximum thread dimension of 1024 x 1024 x 64
+numThreads: 1024 and blockSize: 50
+
+Incorrect value of 0 at index 1000... should be 3000
+
+Incorrect value of 0 at index 1001... should be 3003
+
+Incorrect value of 0 at index 1002... should be 3006
+
+Incorrect value of 0 at index 1003... should be 3009
+
+Incorrect value of 0 at index 1004... should be 3012
+
+Incorrect value of 0 at index 1005... should be 3015
+
+Incorrect value of 0 at index 1006... should be 3018
+
+Incorrect value of 0 at index 1007... should be 3021
+
+Incorrect value of 0 at index 1008... should be 3024
+
+Incorrect value of 0 at index 1009... should be 3027
+
+Incorrect value of 0 at index 1010... should be 3030
+
+Incorrect value of 0 at index 1011... should be 3033
+
+Incorrect value of 0 at index 1012... should be 3036
+
+Incorrect value of 0 at index 1013... should be 3039
+
+Incorrect value of 0 at index 1014... should be 3042
+
+Incorrect value of 0 at index 1015... should be 3045
+
+Incorrect value of 0 at index 1016... should be 3048
+
+Incorrect value of 0 at index 1017... should be 3051
+
+Incorrect value of 0 at index 1018... should be 3054
+
+Incorrect value of 0 at index 1019... should be 3057
+
+Incorrect value of 0 at index 1020... should be 3060
+
+Incorrect value of 0 at index 1021... should be 3063
+
+Incorrect value of 0 at index 1022... should be 3066
+
+Incorrect value of 0 at index 1023... should be 3069
+Done

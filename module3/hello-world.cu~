@@ -6,7 +6,7 @@
 
 // N = data size...
 // Changing this will increase array size and will change number of blocks
-#define N 128 
+#define N 32
 #define BLOCK_SIZE 32
 #define NUM_BLOCKS N/BLOCK_SIZE
 
