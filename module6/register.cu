@@ -2,7 +2,10 @@
 #include <stdlib.h>
 
 #define KERNEL_LOOP 128
-
+int REGS_PER_BLOCK, WARP_SIZE, *MAX_THREADS_DIM;
+size_t TOTAL_GLOBAL_MEM, TOTAL_CONST_MEM;
+int MAX_THREADS_PER_BLOCK;
+__constant__ float data_gpu_const[KERNEL_LOOP];
 __host__ void wait_exit(void)
 {
         char ch;
@@ -25,10 +28,52 @@ __global__ void test_gpu_register(unsigned int * const data, const unsigned int 
         if(tid < num_elements)
         {
                 unsigned int d_tmp = data[tid];
-                d_tmp = d_tmp * 2;
+		for(int i = 0; i < 15; i++) {
+                	d_tmp = d_tmp * 2;
+		}
                 data[tid] = d_tmp;
         }
 }
+
+__global__ void test_gpu_global(unsigned int * const data, const unsigned int num_elements)
+{
+	const unsigned int tid = (blockIdx.x * blockDim.x) + threadIdx.x;
+	if(tid < num_elements)
+	{
+		for(int i = 0; i < 15; i++) {
+			data[tid] = data[tid] * 2;
+		}
+	}
+
+}
+
+__global__ void test_gpu_constant(unsigned int * const data, const unsigned int num_elements)
+{
+	const unsigned int lid = threadIdx.x;
+	const unsigned int tid = (blockIdx.x * blockDim.x) + threadIdx.x;
+	if(tid < num_elements)
+	{
+		unsigned int d_tmp = data_gpu_const[lid];
+		for (int i = 0; i < 15; i++) {
+			d_tmp = d_tmp * 2;
+		}
+		data[tid] = d_tmp;
+	}
+	
+}
+
+/*
+ *checkCuda: will check to see if there is an error returned by CUDA runtime
+ */
+inline
+void checkCuda(cudaError_t errMsg, const char* errContext)
+{
+	if(errMsg != cudaSuccess) {
+		fprintf(stderr, "CUDA Runtime Error From %s: %s\n", errContext, cudaGetErrorString(errMsg));
+		exit(EXIT_FAILURE);
+	}
+}
+
 
 __host__ void gpu_kernel(void)
 {
@@ -38,30 +83,143 @@ __host__ void gpu_kernel(void)
         const unsigned int num_bytes = num_elements * sizeof(unsigned int);
 
         unsigned int * data_gpu;
+	unsigned int * data_gpu_global_only;
+	unsigned int * data_gpu_const_out;
+//	unsigned int * data_gpu_const;
 
         unsigned int host_packed_array[num_elements];
         unsigned int host_packed_array_output[num_elements];
-
+	unsigned int host_packed_array_output2[num_elements];
+	unsigned int host_packed_array_output3[num_elements];
         cudaMalloc(&data_gpu, num_bytes);
+	cudaMalloc(&data_gpu_global_only, num_bytes);
+	cudaMalloc(&data_gpu_const_out, num_bytes);
+//	cudaMalloc(&data_gpu_const, num_bytes);
 
         generate_rand_data(host_packed_array);
+	
+	// Set up variables for storing duration
+	float durRegister, durGlobal, durConst;
+
+	// Set up timing event variables
+	cudaEvent_t startEvent, stopEvent;
+	// Create events for timing
+	checkCuda(cudaEventCreate(&startEvent), "startEvent event creation");
+	checkCuda(cudaEventCreate(&stopEvent), "stopEvent event creation");
 
         cudaMemcpy(data_gpu, host_packed_array, num_bytes,cudaMemcpyHostToDevice);
+	cudaMemcpy(data_gpu_global_only, host_packed_array, num_bytes, cudaMemcpyHostToDevice);
+
+	// Copy constant weights on host to constant weights on device:
+	checkCuda(cudaMemcpyToSymbol(data_gpu_const, host_packed_array, num_bytes), "copy to constant dev weights");
+	
+	// Initialize timer for pageable memory 
+	checkCuda(cudaEventRecord(startEvent, 0), "startEvent event record");
 
         test_gpu_register <<<num_blocks, num_threads>>>(data_gpu, num_elements);
 
         cudaThreadSynchronize();        // Wait for the GPU launched work to complete
         cudaGetLastError();
+	// Stop timer
+	checkCuda(cudaEventRecord(stopEvent, 0), "record stopEvent");
+	checkCuda(cudaEventSynchronize(stopEvent), "synchronize stopEvent");
+	
+	// Calculate duration
+	checkCuda(cudaEventElapsedTime(&durRegister, startEvent, stopEvent), "calculate register duration");
 
         cudaMemcpy(host_packed_array_output, data_gpu, num_bytes,cudaMemcpyDeviceToHost);
 
+
+	// Initialize timer for purely global access 
+	checkCuda(cudaEventRecord(startEvent, 0), "startEvent event record");
+
+        test_gpu_global <<<num_blocks, num_threads>>>(data_gpu_global_only, num_elements);
+
+        cudaThreadSynchronize();        // Wait for the GPU launched work to complete
+        cudaGetLastError();
+	// Stop timer
+	checkCuda(cudaEventRecord(stopEvent, 0), "record stopEvent");
+	checkCuda(cudaEventSynchronize(stopEvent), "synchronize stopEvent");
+	
+	// Calculate duration
+	checkCuda(cudaEventElapsedTime(&durGlobal, startEvent, stopEvent), "calculate register duration");
+
+        cudaMemcpy(host_packed_array_output2, data_gpu_global_only, num_bytes,cudaMemcpyDeviceToHost);
+
+	// Initialize timer for copy from const mem 
+	checkCuda(cudaEventRecord(startEvent, 0), "startEvent event record");
+
+        test_gpu_constant <<<num_blocks, num_threads>>>(data_gpu_const_out, num_elements);
+
+        cudaThreadSynchronize();        // Wait for the GPU launched work to complete
+        cudaGetLastError();
+	// Stop timer
+	checkCuda(cudaEventRecord(stopEvent, 0), "record stopEvent");
+	checkCuda(cudaEventSynchronize(stopEvent), "synchronize stopEvent");
+	
+	// Calculate duration
+	checkCuda(cudaEventElapsedTime(&durConst, startEvent, stopEvent), "calculate register duration");
+
+        cudaMemcpy(host_packed_array_output2, data_gpu_global_only, num_bytes,cudaMemcpyDeviceToHost);
+
         for (int i = 0; i < num_elements; i++){
-                printf("Input value: %x, device output: %x\n",host_packed_array[i], host_packed_array_output[i]);
+                printf("Input value: %x, device output register: %x, device output global: %x, device output const: %x\n",host_packed_array[i], host_packed_array_output[i], host_packed_array_output2[i], host_packed_array_output3[i]);
         }
+	
+	printf("Looping over register access takes %f ms\nLooping over global access takes %f ms\nLooping over const access takes %f ms\n", durRegister, durGlobal, durConst);
 
         cudaFree((void* ) data_gpu);
+	cudaFree((void* ) data_gpu_global_only);
         cudaDeviceReset();
         wait_exit();
+}
+
+void getCUDAInfo() {
+	//=============================Gets number of cuda devices===========================================
+    int deviceCount = 0;
+    checkCuda(cudaGetDeviceCount(&deviceCount), "Failed deviceCount load");
+
+    // This function call returns 0 if there are no CUDA capable devices.
+    if (deviceCount == 0)
+    {
+        printf("There are no available device(s) that support CUDA\n");
+    }
+    else
+    {
+        printf("Detected %d CUDA Capable device(s)\n", deviceCount);
+    }
+//=============================Gets number of cuda devices===========================================
+    
+    // for each device found, store this device in some type of object
+    int device;
+
+    for (device = 0; device < deviceCount; device++) {
+	
+			// Sets the context of the device so that we know which device we are working with if there
+			// are multiple	
+			cudaSetDevice(device);
+  		cudaDeviceProp deviceProp;
+
+			// gets the "properties" struct that stores the properties of a device
+			// from this property struct, we can query the limitations of this device
+  		cudaGetDeviceProperties(&deviceProp, device);
+
+			printf("\nDevice: %d \"%s\"\n===========================================\n", device, deviceProp.name);
+	
+			TOTAL_GLOBAL_MEM = deviceProp.totalGlobalMem;
+			REGS_PER_BLOCK = deviceProp.regsPerBlock;
+			WARP_SIZE = deviceProp.warpSize;
+			MAX_THREADS_PER_BLOCK = deviceProp.maxThreadsPerBlock;
+			MAX_THREADS_DIM = deviceProp.maxThreadsDim;
+			TOTAL_CONST_MEM = deviceProp.totalConstMem; 
+	printf("The %s has:\n\t-%zu total bytes of global memory\n\t-%zu bytes of constant memory\n\t-%d registers per block\n\t-%d threads per warp\n\t-A maximum of %d threads per block\n\t-%zu total bytes of shared memory\n\t-A maximum thread dimension of %d x %d x %d\n", deviceProp.name, TOTAL_GLOBAL_MEM,TOTAL_CONST_MEM, REGS_PER_BLOCK, WARP_SIZE, MAX_THREADS_PER_BLOCK,deviceProp.sharedMemPerMultiprocessor, MAX_THREADS_DIM[0], MAX_THREADS_DIM[1], MAX_THREADS_DIM[2]); 
+	// What I think we care about:
+	// 1. totalGlobalMem
+	// 2. regsPerBlock
+	// 3. warpSize (i.e. numThreadsPerBlock (is this equal to regsPerBlock??)
+	// 4. maxThreadsperBlock
+	// 5. maxThreadsDim[3]
+    }
 }
 
 void execute_host_functions()
@@ -71,6 +229,7 @@ void execute_host_functions()
 
 void execute_gpu_functions()
 {
+	getCUDAInfo();	
 	gpu_kernel();
 }
 
