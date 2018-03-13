@@ -25,7 +25,12 @@ void dotProduct(float *weights, float *input, float *activityOutput) {
 	
 	// Initialize shared memory to store element-wise vector product
 	extern __shared__ float prod[];
-	prod[localId] = input[id] * weights[localId];
+	__shared__ float weightsShared[NUM_WEIGHTS];
+	// Copy weights to shared memory
+	if(localId < NUM_WEIGHTS) {
+		weightsShared[localId] = weights[id];
+	}	
+	prod[localId] = input[id] * weightsShared[localId];
 	
 	// Synchronize threads before adding results
 	__syncthreads();
@@ -39,6 +44,8 @@ void dotProduct(float *weights, float *input, float *activityOutput) {
 	}
 	if(threadIdx.x == 0) {
 		activityOutput[blockIdx.x] = prod[0];
+		// Scale dot product output
+		activityOutput[blockIdx.x] = activityOutput[blockIdx.x] * 2;
 	}
 }
 
@@ -64,6 +71,8 @@ void dotProduct2(float * input, float * activityOutput) {
 	}
 	if(threadIdx.x == 0) {
 		activityOutput[blockIdx.x] = prod[0];
+		// Scale dot product output
+		activityOutput[blockIdx.x] = activityOutput[blockIdx.x] * 2;
 	}
 }
 
@@ -77,12 +86,14 @@ void dotProduct3(float *weights, float *input, float *activityOutput) {
 	
 	// Initialize shared memory to store element-wise vector product
 	extern __shared__ float prod[];
+	// Copy weights to registers
 	float weightTmp = weights[localId];
-	prod[localId] = input[id] * weightTmp;
+	// Store a temporary product result in register memory
+	float prodTmp1 = input[id] * weightTmp;
+	prod[localId] = prodTmp1;
 	
 	// Synchronize threads before adding results
 	__syncthreads();
-	
 	// Loop over array to combine input
 	for(int i = blockDim.x/2; i > 0; i = i/2) {
 		if(localId < i) {
@@ -91,7 +102,10 @@ void dotProduct3(float *weights, float *input, float *activityOutput) {
 		__syncthreads();
 	}
 	if(threadIdx.x == 0) {
-		activityOutput[blockIdx.x] = prod[0];
+		float tempRes = prod[0];
+		// Compute dot product scaling in register memory
+		tempRes = tempRes * 2;
+		activityOutput[blockIdx.x] = tempRes;
 	}
 }
 
@@ -315,7 +329,7 @@ int main(int argc, char* argv[]) {
 	// Calculate duration
 	checkCuda(cudaEventElapsedTime(&durGlobal, startEvent, stopEvent), "calculate pageable duration");
 	
-	printf("\n\nThe dotProduct kernel executed using global memory weights %f milliseconds\n\n", durGlobal);
+	printf("\n\nThe dotProduct kernel executed using shared memory weights %f milliseconds\n\n", durGlobal);
 	
 	// Initialize timer for constant memory weights 
 	checkCuda(cudaEventRecord(startEvent, 0), "startEvent event record");			
@@ -356,7 +370,7 @@ int main(int argc, char* argv[]) {
 		serialOutput += inputs[i]*weights[weightsInd];
 		weightsInd++;
 		if (i > 0 && ((i+1) % blockSize) == 0) {
-			printf("Output %d -- Serial: %f, Parallel Global: %f, Parallel Const: %f, Parallel Register: %f\n", ((i+1)/blockSize), serialOutput, outputs[((i+1)/blockSize) - 1], outputsConst[((i+1)/blockSize) - 1],  outputsRegister[((i+1)/blockSize) - 1]);
+			printf("Output %d -- Serial: %f, Parallel Global: %f, Parallel Const: %f, Parallel Register: %f\n", ((i+1)/blockSize), serialOutput*2, outputs[((i+1)/blockSize) - 1], outputsConst[((i+1)/blockSize) - 1],  outputsRegister[((i+1)/blockSize) - 1]);
 			serialOutput = 0.00;
 			weightsInd = 0;
 		}

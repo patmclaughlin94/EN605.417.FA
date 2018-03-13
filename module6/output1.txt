@@ -12,14 +12,14 @@ The GK20A has:
 	-A maximum thread dimension of 1024 x 1024 x 64
 
 
-The dotProduct kernel executed using global memory weights 2.608750 milliseconds
+The dotProduct kernel executed using shared memory weights 1.208166 milliseconds
 
 
 
-The dotProduct kernel executed using constant memory weights took 1.561916 milliseconds
+The dotProduct kernel executed using constant memory weights took 1.574666 milliseconds
 
 
 
-The dotProduct kernel executed using register memory weights took 1.171083 milliseconds
+The dotProduct kernel executed using register memory weights took 0.962167 milliseconds
 
-Output 1 -- Serial: 944162.000000, Parallel Global: 944162.000000, Parallel Const: 944162.000000, Parallel Register: 944162.000000
+Output 1 -- Serial: 1918306.000000, Parallel Global: 1918306.000000, Parallel Const: 1918306.000000, Parallel Register: 1918306.000000
