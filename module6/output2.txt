@@ -1,0 +1,34 @@
+args 2
+Detected 1 CUDA Capable device(s)
+
+Device: 0 "GK20A"
+===========================================
+The GK20A has:
+	-1984385024 total bytes of global memory
+	-65536 bytes of constant memory
+	-32768 registers per block
+	-32 threads per warp
+	-A maximum of 512 threads per block
+	-A maximum thread dimension of 1024 x 1024 x 64
+
+
+The dotProduct kernel executed using global memory weights 2.599083 milliseconds
+
+
+
+The dotProduct kernel executed using constant memory weights took 1.838582 milliseconds
+
+
+
+The dotProduct kernel executed using register memory weights took 1.682416 milliseconds
+
+Output 1 -- Serial: 944162.000000, Parallel Global: 944162.000000, Parallel Const: 944162.000000, Parallel Register: 944162.000000
+Output 2 -- Serial: 856294.000000, Parallel Global: 856294.000000, Parallel Const: 856294.000000, Parallel Register: 856294.000000
+Output 3 -- Serial: 877998.000000, Parallel Global: 877998.000000, Parallel Const: 877998.000000, Parallel Register: 877998.000000
+Output 4 -- Serial: 896529.000000, Parallel Global: 896529.000000, Parallel Const: 896529.000000, Parallel Register: 896529.000000
+Output 5 -- Serial: 951606.000000, Parallel Global: 951606.000000, Parallel Const: 951606.000000, Parallel Register: 951606.000000
+Output 6 -- Serial: 924715.000000, Parallel Global: 924715.000000, Parallel Const: 924715.000000, Parallel Register: 924715.000000
+Output 7 -- Serial: 919250.000000, Parallel Global: 919250.000000, Parallel Const: 919250.000000, Parallel Register: 919250.000000
+Output 8 -- Serial: 930809.000000, Parallel Global: 930809.000000, Parallel Const: 930809.000000, Parallel Register: 930809.000000
+Output 9 -- Serial: 967059.000000, Parallel Global: 967059.000000, Parallel Const: 967059.000000, Parallel Register: 967059.000000
+Output 10 -- Serial: 872858.000000, Parallel Global: 872858.000000, Parallel Const: 872858.000000, Parallel Register: 872858.000000

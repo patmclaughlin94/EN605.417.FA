@@ -1,0 +1,124 @@
+args 2
+Detected 1 CUDA Capable device(s)
+
+Device: 0 "GK20A"
+===========================================
+The GK20A has:
+	-1984385024 total bytes of global memory
+	-65536 bytes of constant memory
+	-32768 registers per block
+	-32 threads per warp
+	-A maximum of 512 threads per block
+	-A maximum thread dimension of 1024 x 1024 x 64
+
+
+The dotProduct kernel executed using global memory weights 6.294999 milliseconds
+
+
+
+The dotProduct kernel executed using constant memory weights took 4.643916 milliseconds
+
+
+
+The dotProduct kernel executed using register memory weights took 3.267333 milliseconds
+
+Output 1 -- Serial: 944162.000000, Parallel Global: 944162.000000, Parallel Const: 944162.000000, Parallel Register: 944162.000000
+Output 2 -- Serial: 856294.000000, Parallel Global: 856294.000000, Parallel Const: 856294.000000, Parallel Register: 856294.000000
+Output 3 -- Serial: 877998.000000, Parallel Global: 877998.000000, Parallel Const: 877998.000000, Parallel Register: 877998.000000
+Output 4 -- Serial: 896529.000000, Parallel Global: 896529.000000, Parallel Const: 896529.000000, Parallel Register: 896529.000000
+Output 5 -- Serial: 951606.000000, Parallel Global: 951606.000000, Parallel Const: 951606.000000, Parallel Register: 951606.000000
+Output 6 -- Serial: 924715.000000, Parallel Global: 924715.000000, Parallel Const: 924715.000000, Parallel Register: 924715.000000
+Output 7 -- Serial: 919250.000000, Parallel Global: 919250.000000, Parallel Const: 919250.000000, Parallel Register: 919250.000000
+Output 8 -- Serial: 930809.000000, Parallel Global: 930809.000000, Parallel Const: 930809.000000, Parallel Register: 930809.000000
+Output 9 -- Serial: 967059.000000, Parallel Global: 967059.000000, Parallel Const: 967059.000000, Parallel Register: 967059.000000
+Output 10 -- Serial: 872858.000000, Parallel Global: 872858.000000, Parallel Const: 872858.000000, Parallel Register: 872858.000000
+Output 11 -- Serial: 957009.000000, Parallel Global: 957009.000000, Parallel Const: 957009.000000, Parallel Register: 957009.000000
+Output 12 -- Serial: 904309.000000, Parallel Global: 904309.000000, Parallel Const: 904309.000000, Parallel Register: 904309.000000
+Output 13 -- Serial: 935884.000000, Parallel Global: 935884.000000, Parallel Const: 935884.000000, Parallel Register: 935884.000000
+Output 14 -- Serial: 931026.000000, Parallel Global: 931026.000000, Parallel Const: 931026.000000, Parallel Register: 931026.000000
+Output 15 -- Serial: 871401.000000, Parallel Global: 871401.000000, Parallel Const: 871401.000000, Parallel Register: 871401.000000
+Output 16 -- Serial: 894680.000000, Parallel Global: 894680.000000, Parallel Const: 894680.000000, Parallel Register: 894680.000000
+Output 17 -- Serial: 928701.000000, Parallel Global: 928701.000000, Parallel Const: 928701.000000, Parallel Register: 928701.000000
+Output 18 -- Serial: 898134.000000, Parallel Global: 898134.000000, Parallel Const: 898134.000000, Parallel Register: 898134.000000
+Output 19 -- Serial: 929989.000000, Parallel Global: 929989.000000, Parallel Const: 929989.000000, Parallel Register: 929989.000000
+Output 20 -- Serial: 947317.000000, Parallel Global: 947317.000000, Parallel Const: 947317.000000, Parallel Register: 947317.000000
+Output 21 -- Serial: 930534.000000, Parallel Global: 930534.000000, Parallel Const: 930534.000000, Parallel Register: 930534.000000
+Output 22 -- Serial: 916999.000000, Parallel Global: 916999.000000, Parallel Const: 916999.000000, Parallel Register: 916999.000000
+Output 23 -- Serial: 908871.000000, Parallel Global: 908871.000000, Parallel Const: 908871.000000, Parallel Register: 908871.000000
+Output 24 -- Serial: 933011.000000, Parallel Global: 933011.000000, Parallel Const: 933011.000000, Parallel Register: 933011.000000
+Output 25 -- Serial: 942481.000000, Parallel Global: 942481.000000, Parallel Const: 942481.000000, Parallel Register: 942481.000000
+Output 26 -- Serial: 948457.000000, Parallel Global: 948457.000000, Parallel Const: 948457.000000, Parallel Register: 948457.000000
+Output 27 -- Serial: 889521.000000, Parallel Global: 889521.000000, Parallel Const: 889521.000000, Parallel Register: 889521.000000
+Output 28 -- Serial: 931333.000000, Parallel Global: 931333.000000, Parallel Const: 931333.000000, Parallel Register: 931333.000000
+Output 29 -- Serial: 930580.000000, Parallel Global: 930580.000000, Parallel Const: 930580.000000, Parallel Register: 930580.000000
+Output 30 -- Serial: 885518.000000, Parallel Global: 885518.000000, Parallel Const: 885518.000000, Parallel Register: 885518.000000
+Output 31 -- Serial: 906729.000000, Parallel Global: 906729.000000, Parallel Const: 906729.000000, Parallel Register: 906729.000000
+Output 32 -- Serial: 867470.000000, Parallel Global: 867470.000000, Parallel Const: 867470.000000, Parallel Register: 867470.000000
+Output 33 -- Serial: 911506.000000, Parallel Global: 911506.000000, Parallel Const: 911506.000000, Parallel Register: 911506.000000
+Output 34 -- Serial: 986880.000000, Parallel Global: 986880.000000, Parallel Const: 986880.000000, Parallel Register: 986880.000000
+Output 35 -- Serial: 918711.000000, Parallel Global: 918711.000000, Parallel Const: 918711.000000, Parallel Register: 918711.000000
+Output 36 -- Serial: 944801.000000, Parallel Global: 944801.000000, Parallel Const: 944801.000000, Parallel Register: 944801.000000
+Output 37 -- Serial: 928954.000000, Parallel Global: 928954.000000, Parallel Const: 928954.000000, Parallel Register: 928954.000000
+Output 38 -- Serial: 882971.000000, Parallel Global: 882971.000000, Parallel Const: 882971.000000, Parallel Register: 882971.000000
+Output 39 -- Serial: 949112.000000, Parallel Global: 949112.000000, Parallel Const: 949112.000000, Parallel Register: 949112.000000
+Output 40 -- Serial: 915475.000000, Parallel Global: 915475.000000, Parallel Const: 915475.000000, Parallel Register: 915475.000000
+Output 41 -- Serial: 911088.000000, Parallel Global: 911088.000000, Parallel Const: 911088.000000, Parallel Register: 911088.000000
+Output 42 -- Serial: 921752.000000, Parallel Global: 921752.000000, Parallel Const: 921752.000000, Parallel Register: 921752.000000
+Output 43 -- Serial: 992047.000000, Parallel Global: 992047.000000, Parallel Const: 992047.000000, Parallel Register: 992047.000000
+Output 44 -- Serial: 898387.000000, Parallel Global: 898387.000000, Parallel Const: 898387.000000, Parallel Register: 898387.000000
+Output 45 -- Serial: 966756.000000, Parallel Global: 966756.000000, Parallel Const: 966756.000000, Parallel Register: 966756.000000
+Output 46 -- Serial: 936843.000000, Parallel Global: 936843.000000, Parallel Const: 936843.000000, Parallel Register: 936843.000000
+Output 47 -- Serial: 939258.000000, Parallel Global: 939258.000000, Parallel Const: 939258.000000, Parallel Register: 939258.000000
+Output 48 -- Serial: 894300.000000, Parallel Global: 894300.000000, Parallel Const: 894300.000000, Parallel Register: 894300.000000
+Output 49 -- Serial: 904027.000000, Parallel Global: 904027.000000, Parallel Const: 904027.000000, Parallel Register: 904027.000000
+Output 50 -- Serial: 870082.000000, Parallel Global: 870082.000000, Parallel Const: 870082.000000, Parallel Register: 870082.000000
+Output 51 -- Serial: 930721.000000, Parallel Global: 930721.000000, Parallel Const: 930721.000000, Parallel Register: 930721.000000
+Output 52 -- Serial: 881576.000000, Parallel Global: 881576.000000, Parallel Const: 881576.000000, Parallel Register: 881576.000000
+Output 53 -- Serial: 891443.000000, Parallel Global: 891443.000000, Parallel Const: 891443.000000, Parallel Register: 891443.000000
+Output 54 -- Serial: 859935.000000, Parallel Global: 859935.000000, Parallel Const: 859935.000000, Parallel Register: 859935.000000
+Output 55 -- Serial: 940829.000000, Parallel Global: 940829.000000, Parallel Const: 940829.000000, Parallel Register: 940829.000000
+Output 56 -- Serial: 899576.000000, Parallel Global: 899576.000000, Parallel Const: 899576.000000, Parallel Register: 899576.000000
+Output 57 -- Serial: 933123.000000, Parallel Global: 933123.000000, Parallel Const: 933123.000000, Parallel Register: 933123.000000
+Output 58 -- Serial: 942842.000000, Parallel Global: 942842.000000, Parallel Const: 942842.000000, Parallel Register: 942842.000000
+Output 59 -- Serial: 909057.000000, Parallel Global: 909057.000000, Parallel Const: 909057.000000, Parallel Register: 909057.000000
+Output 60 -- Serial: 930656.000000, Parallel Global: 930656.000000, Parallel Const: 930656.000000, Parallel Register: 930656.000000
+Output 61 -- Serial: 849049.000000, Parallel Global: 849049.000000, Parallel Const: 849049.000000, Parallel Register: 849049.000000
+Output 62 -- Serial: 897743.000000, Parallel Global: 897743.000000, Parallel Const: 897743.000000, Parallel Register: 897743.000000
+Output 63 -- Serial: 926776.000000, Parallel Global: 926776.000000, Parallel Const: 926776.000000, Parallel Register: 926776.000000
+Output 64 -- Serial: 885101.000000, Parallel Global: 885101.000000, Parallel Const: 885101.000000, Parallel Register: 885101.000000
+Output 65 -- Serial: 925966.000000, Parallel Global: 925966.000000, Parallel Const: 925966.000000, Parallel Register: 925966.000000
+Output 66 -- Serial: 872863.000000, Parallel Global: 872863.000000, Parallel Const: 872863.000000, Parallel Register: 872863.000000
+Output 67 -- Serial: 888750.000000, Parallel Global: 888750.000000, Parallel Const: 888750.000000, Parallel Register: 888750.000000
+Output 68 -- Serial: 952807.000000, Parallel Global: 952807.000000, Parallel Const: 952807.000000, Parallel Register: 952807.000000
+Output 69 -- Serial: 927544.000000, Parallel Global: 927544.000000, Parallel Const: 927544.000000, Parallel Register: 927544.000000
+Output 70 -- Serial: 910132.000000, Parallel Global: 910132.000000, Parallel Const: 910132.000000, Parallel Register: 910132.000000
+Output 71 -- Serial: 902218.000000, Parallel Global: 902218.000000, Parallel Const: 902218.000000, Parallel Register: 902218.000000
+Output 72 -- Serial: 883932.000000, Parallel Global: 883932.000000, Parallel Const: 883932.000000, Parallel Register: 883932.000000
+Output 73 -- Serial: 922164.000000, Parallel Global: 922164.000000, Parallel Const: 922164.000000, Parallel Register: 922164.000000
+Output 74 -- Serial: 904612.000000, Parallel Global: 904612.000000, Parallel Const: 904612.000000, Parallel Register: 904612.000000
+Output 75 -- Serial: 914615.000000, Parallel Global: 914615.000000, Parallel Const: 914615.000000, Parallel Register: 914615.000000
+Output 76 -- Serial: 912201.000000, Parallel Global: 912201.000000, Parallel Const: 912201.000000, Parallel Register: 912201.000000
+Output 77 -- Serial: 938022.000000, Parallel Global: 938022.000000, Parallel Const: 938022.000000, Parallel Register: 938022.000000
+Output 78 -- Serial: 919200.000000, Parallel Global: 919200.000000, Parallel Const: 919200.000000, Parallel Register: 919200.000000
+Output 79 -- Serial: 932623.000000, Parallel Global: 932623.000000, Parallel Const: 932623.000000, Parallel Register: 932623.000000
+Output 80 -- Serial: 902350.000000, Parallel Global: 902350.000000, Parallel Const: 902350.000000, Parallel Register: 902350.000000
+Output 81 -- Serial: 923940.000000, Parallel Global: 923940.000000, Parallel Const: 923940.000000, Parallel Register: 923940.000000
+Output 82 -- Serial: 931463.000000, Parallel Global: 931463.000000, Parallel Const: 931463.000000, Parallel Register: 931463.000000
+Output 83 -- Serial: 900653.000000, Parallel Global: 900653.000000, Parallel Const: 900653.000000, Parallel Register: 900653.000000
+Output 84 -- Serial: 945451.000000, Parallel Global: 945451.000000, Parallel Const: 945451.000000, Parallel Register: 945451.000000
+Output 85 -- Serial: 896484.000000, Parallel Global: 896484.000000, Parallel Const: 896484.000000, Parallel Register: 896484.000000
+Output 86 -- Serial: 880580.000000, Parallel Global: 880580.000000, Parallel Const: 880580.000000, Parallel Register: 880580.000000
+Output 87 -- Serial: 929659.000000, Parallel Global: 929659.000000, Parallel Const: 929659.000000, Parallel Register: 929659.000000
+Output 88 -- Serial: 932279.000000, Parallel Global: 932279.000000, Parallel Const: 932279.000000, Parallel Register: 932279.000000
+Output 89 -- Serial: 903588.000000, Parallel Global: 903588.000000, Parallel Const: 903588.000000, Parallel Register: 903588.000000
+Output 90 -- Serial: 943733.000000, Parallel Global: 943733.000000, Parallel Const: 943733.000000, Parallel Register: 943733.000000
+Output 91 -- Serial: 912016.000000, Parallel Global: 912016.000000, Parallel Const: 912016.000000, Parallel Register: 912016.000000
+Output 92 -- Serial: 893602.000000, Parallel Global: 893602.000000, Parallel Const: 893602.000000, Parallel Register: 893602.000000
+Output 93 -- Serial: 948407.000000, Parallel Global: 948407.000000, Parallel Const: 948407.000000, Parallel Register: 948407.000000
+Output 94 -- Serial: 899583.000000, Parallel Global: 899583.000000, Parallel Const: 899583.000000, Parallel Register: 899583.000000
+Output 95 -- Serial: 902667.000000, Parallel Global: 902667.000000, Parallel Const: 902667.000000, Parallel Register: 902667.000000
+Output 96 -- Serial: 930367.000000, Parallel Global: 930367.000000, Parallel Const: 930367.000000, Parallel Register: 930367.000000
+Output 97 -- Serial: 901885.000000, Parallel Global: 901885.000000, Parallel Const: 901885.000000, Parallel Register: 901885.000000
+Output 98 -- Serial: 907700.000000, Parallel Global: 907700.000000, Parallel Const: 907700.000000, Parallel Register: 907700.000000
+Output 99 -- Serial: 893035.000000, Parallel Global: 893035.000000, Parallel Const: 893035.000000, Parallel Register: 893035.000000
+Output 100 -- Serial: 894196.000000, Parallel Global: 894196.000000, Parallel Const: 894196.000000, Parallel Register: 894196.000000
