@@ -13,11 +13,12 @@
 //    This is a simple kernel performing convolution.
 
 __kernel void convolve(
-	const __global  uint * const input,
+	__global const uint * input,
     __constant uint * const mask,
     __global  uint * const output,
     const int inputWidth,
-    const int maskWidth)
+    const int maskWidth,
+    const int normalize)
 {
     const int x = get_global_id(0);
     const int y = get_global_id(1);
@@ -33,5 +34,9 @@ __kernel void convolve(
         }
     } 
     
-	output[y * get_global_size(0) + x] = sum;
+    if(normalize == 0) {
+        output[y * get_global_size(0) + x] = sum;
+    } else {
+        output[y * get_global_size(0) + x] = sum/4;
+    }
 }
