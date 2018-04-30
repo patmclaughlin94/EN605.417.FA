@@ -46,6 +46,7 @@ int main(int argc, char** argv) {
     int openCLSelector = openCLExists();
     if(openCLSelector == 1) {
         cout << "Houston, we have opencl!" << endl;
+        // Handle exception when this does not work
         getGPUInfo(0,"g++ -o cl_info OpenCLInfo.cpp -framework OpenCL");
     }
 }
