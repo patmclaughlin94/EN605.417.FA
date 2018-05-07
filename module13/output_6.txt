@@ -1,0 +1,8 @@
+Set up platform, device, context, program and kernels
+populated arrays!
+executed add
+executed sub
+executed mult
+executed div
+Non Blocking kernel runs on arrays of length 1000 took 0.838160 ms
+all done!

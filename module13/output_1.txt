@@ -1,0 +1,8 @@
+Set up platform, device, context, program and kernels
+populated arrays!
+executed add
+executed sub
+executed mult
+executed div
+Blocking kernel runs on arrays of length 100 took 2.296720 ms
+all done!
